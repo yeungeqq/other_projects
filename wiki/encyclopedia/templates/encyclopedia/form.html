@@ -1,0 +1,26 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Create New Page
+{% endblock %}
+
+{% block body %}
+    <form action="{% url 'create_new_page' %}" method="post">
+        {% csrf_token %}
+        <h1>Add New Page</h1>
+        {% if exist %}
+        <div class="alert alert-danger col-md-8 col-lg-8">The entered page is already existed. Please enter a new page.</div>
+        {% endif %}
+        <p>Title</P>
+        <input name="title" type="text" class="form-control col-md-8 col-lg-8" value="{{title}}"><br>
+        <p>Content</P>
+        <textarea name="content">{{content}}</textarea><br>
+
+        {% if edit %}
+        <input type="hidden" name="edit" value="True">
+        <input type="submit" value="Save">
+        {% else %}
+        <input type="submit" value="Create New Page">
+        {% endif%}
+    </form>
+{% endblock %}
